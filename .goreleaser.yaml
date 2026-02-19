@@ -1,0 +1,442 @@
+project_name: SKM
+version: 2
+dist: ./dist
+report_sizes: true
+
+snapshot:
+  version_template: SNAPSHOT-{{ .ShortCommit }}
+
+env:
+  - MODULES_CDN_VERSION= {{ if index .Env "CDN_VERSION"  }}{{ .Env.CDN_VERSION }}{{ else }}dev{{ end }}
+
+before:
+  hooks:
+    - make manpages
+    - make auto-completions
+builds:
+  - id: general
+    env:
+      - GO111MODULE=on
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      #    guaranteed:
+      - amd64 # x86_64
+      - 386 # 32-bit version of x86
+      - arm64
+      - arm
+      #     misc:
+      - ppc64le # PowerPC 64-bit Little Endian
+      - ppc64 # PowerPC 64-bit Big Endian
+      - s390x # IBM System z
+      - mips64 # MIPS 64-bit Big Endian
+      - mips64le # MIPS 64-bit Little Endian
+      - riscv64 # RISC-V 64-bit
+      - loong64 # LoongArch 64-bit
+
+    ldflags:
+      - -s # strip the debug information
+      - -w # strip the DWARF symbols, which will reduce the binary size
+      - -X 'github.com/mohammadv184/skm/configs.Version={{ .Tag }}'
+      - -X 'github.com/mohammadv184/skm/configs.Commit={{ .ShortCommit }}'
+      - -X 'github.com/mohammadv184/skm/configs.BuildDate={{ .Date }}'
+
+
+    main: ./cmd/skm
+    binary: skm
+    mod_timestamp: "{{ .CommitTimestamp }}"
+  - id: snapcraft
+    env:
+      - GO111MODULE=on
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      #    guaranteed:
+      - amd64 # x86_64
+      - 386 # 32-bit version of x86
+      - arm64
+      - arm
+      #     misc:
+      - ppc64le # PowerPC 64-bit Little Endian
+      - ppc64 # PowerPC 64-bit Big Endian
+      - s390x # IBM System z
+      - mips64 # MIPS 64-bit Big Endian
+      - mips64le # MIPS 64-bit Little Endian
+      - riscv64 # RISC-V 64-bit
+      - loong64 # LoongArch 64-bit
+
+    ldflags:
+      - -s # strip the debug information
+      - -w # strip the DWARF symbols, which will reduce the binary size
+      - -X 'github.com/mohammadv184/skm/configs.Version={{ .Tag }}'
+      - -X 'github.com/mohammadv184/skm/configs.Commit={{ .ShortCommit }}'
+      - -X 'github.com/mohammadv184/skm/configs.BuildDate={{ .Date }}'
+      - -X 'github.com/mohammadv184/skm/configs.Distribution=snapcraft'
+
+
+    main: ./cmd/skm
+    binary: skm
+    mod_timestamp: "{{ .CommitTimestamp }}"
+  - id: dpkg
+    env:
+      - GO111MODULE=on
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      #    guaranteed:
+      - amd64 # x86_64
+      - 386 # 32-bit version of x86
+      - arm64
+      - arm
+      #     misc:
+      - ppc64le # PowerPC 64-bit Little Endian
+      - ppc64 # PowerPC 64-bit Big Endian
+      - s390x # IBM System z
+      - mips64 # MIPS 64-bit Big Endian
+      - mips64le # MIPS 64-bit Little Endian
+      - riscv64 # RISC-V 64-bit
+      - loong64 # LoongArch 64-bit
+
+    ldflags:
+      - -s # strip the debug information
+      - -w # strip the DWARF symbols, which will reduce the binary size
+      - -X 'github.com/mohammadv184/skm/configs.Version={{ .Tag }}'
+      - -X 'github.com/mohammadv184/skm/configs.Commit={{ .ShortCommit }}'
+      - -X 'github.com/mohammadv184/skm/configs.BuildDate={{ .Date }}'
+      - -X 'github.com/mohammadv184/skm/configs.Distribution=apt'
+
+    main: ./cmd/skm
+    binary: skm
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+  - id: rpm
+    env:
+      - GO111MODULE=on
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      #    guaranteed:
+      - amd64 # x86_64
+      - 386 # 32-bit version of x86
+      - arm64
+      - arm
+      #     misc:
+      - ppc64le # PowerPC 64-bit Little Endian
+      - ppc64 # PowerPC 64-bit Big Endian
+      - s390x # IBM System z
+      - mips64 # MIPS 64-bit Big Endian
+      - mips64le # MIPS 64-bit Little Endian
+      - riscv64 # RISC-V 64-bit
+      - loong64 # LoongArch 64-bit
+
+    ldflags:
+      - -s # strip the debug information
+      - -w # strip the DWARF symbols, which will reduce the binary size
+      - -X 'github.com/mohammadv184/skm/configs.Version={{ .Tag }}'
+      - -X 'github.com/mohammadv184/skm/configs.Commit={{ .ShortCommit }}'
+      - -X 'github.com/mohammadv184/skm/configs.BuildDate={{ .Date }}'
+      - -X 'github.com/mohammadv184/skm/configs.Distribution=rpm'
+
+
+    main: ./cmd/skm
+    binary: skm
+    mod_timestamp: "{{ .CommitTimestamp }}"
+  - id: pacman
+    env:
+      - GO111MODULE=on
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      #    guaranteed:
+      - amd64 # x86_64
+      - 386 # 32-bit version of x86
+      - arm64
+      - arm
+      #     misc:
+      - ppc64le # PowerPC 64-bit Little Endian
+      - ppc64 # PowerPC 64-bit Big Endian
+      - s390x # IBM System z
+      - mips64 # MIPS 64-bit Big Endian
+      - mips64le # MIPS 64-bit Little Endian
+      - riscv64 # RISC-V 64-bit
+      - loong64 # LoongArch 64-bit
+
+    ldflags:
+      - -s # strip the debug information
+      - -w # strip the DWARF symbols, which will reduce the binary size
+      - -X 'github.com/mohammadv184/skm/configs.Version={{ .Tag }}'
+      - -X 'github.com/mohammadv184/skm/configs.Commit={{ .ShortCommit }}'
+      - -X 'github.com/mohammadv184/skm/configs.BuildDate={{ .Date }}'
+      - -X 'github.com/mohammadv184/skm/configs.Distribution=pacman'
+
+
+    main: ./cmd/skm
+    binary: skm
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+universal_binaries: # mac fat binaries
+  - id: skm-mac-all
+    name_template: "{{ .ProjectName }}_{{ .Version }}_mac_all"
+    replace: false
+
+gomod:
+  proxy: true
+  mod: readonly
+
+nfpms:
+  - id: skm-deb
+    builds:
+      - dpkg
+    package_name: skm
+    file_name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .ShortCommit }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    homepage: https://github.com/mohammadv184/skm
+    maintainer: Mohammad Abbasi <mohammad.v184@gmail.com>
+    description: A CLI for managing FIDO2 security keys.
+    license: MIT
+    section: utility
+    priority: optional
+    formats:
+      - deb
+    bindir: /usr/bin
+    contents:
+      - src: ./assets/auto-completions/skm.bash
+        dst: /usr/share/bash-completion/completions/skm
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: ./assets/auto-completions/skm.fish
+        dst: /usr/share/fish/vendor_completions.d/skm.fish
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: ./assets/auto-completions/skm.zsh
+        dst: /usr/share/zsh/vendor-completions/_skm
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: ./assets/mandocs/skm.1.gz
+        dst: /usr/share/man/man1/skm.1.gz
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+  - id: skm-rpm
+    builds:
+      - rpm
+    package_name: skm
+    file_name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .ShortCommit }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    homepage: https://github.com/mohammadv184/skm
+    maintainer: Mohammad Abbasi <mohammad.v184@gmail.com>
+    description: A CLI for managing FIDO2 security keys.
+    license: MIT
+    section: utility
+    priority: optional
+    formats:
+      - rpm
+    bindir: /usr/bin
+    rpm:
+      summary: A CLI for managing FIDO2 security keys.
+      group: Development/Tools # deprecated, but we use it for compatibility
+      packager: Mohammad Abbasi <mohammad.v184@gmail.com>
+      compression: gzip # most common
+    contents:
+      - src: ./assets/auto-completions/skm.bash
+        dst: /usr/share/bash-completion/completions/skm
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: ./assets/auto-completions/skm.fish
+        dst: /usr/share/fish/vendor_completions.d/skm.fish
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: ./assets/auto-completions/skm.zsh
+        dst: /usr/share/zsh/vendor-completions/_skm
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: ./assets/mandocs/skm.1.gz
+        dst: /usr/share/man/man1/skm.1.gz
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+  - id: skm-arch
+    builds:
+      - pacman
+    package_name: skm
+    file_name_template: "{{ .ProjectName }}-{{ .Version }}-{{ .ShortCommit }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    homepage: https://github.com/mohammadv184/skm
+    maintainer: Mohammad Abbasi <mohammad.v184@gmail.com>
+    description: A CLI for managing FIDO2 security keys.
+    license: MIT
+    section: utility
+    priority: optional
+    formats:
+      - archlinux
+    bindir: /usr/bin
+    archlinux:
+      packager: Mohammad Abbasi <mohammad.v184@gmail.com>
+    contents:
+      - src: ./assets/auto-completions/skm.bash
+        dst: /usr/share/bash-completion/completions/skm
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: ./assets/auto-completions/skm.fish
+        dst: /usr/share/fish/vendor_completions.d/skm.fish
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: ./assets/auto-completions/skm.zsh
+        dst: /usr/share/zsh/vendor-completions/_skm
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: ./assets/mandocs/skm.1.gz
+        dst: /usr/share/man/man1/skm.1.gz
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+
+snapcrafts:
+  - name: skm
+    builds:
+      - snapcraft
+    title: "SKM: Security Key Manager"
+    publish: false
+    summary: A CLI for managing FIDO2 security keys.
+    description: |
+        SKM is a powerful command-line interface (CLI) tool designed to simplify the management of FIDO2 security keys. With SKM, users can easily configure, monitor, and maintain their security keys, ensuring enhanced security for their online accounts. Whether you're a developer, system administrator, or security enthusiast, SKM provides an intuitive and efficient way to manage your FIDO2 security keys with ease.
+    channel_templates:
+      - edge
+      - stable
+    grade: stable
+    confinement: strict
+    license: MIT
+    base: bare # we don't have any requirements that need a base
+    apps:
+      skm:
+        command: skm
+        plugs: [ "home","network"]
+
+#chocolateys:
+#  - name: skm
+#    package_source_url: https://github.com/mohammadv184/skm
+#    owners: Mohammad Abbasi
+#    title: SKM: Security Key Manager
+#    authors: Mohammad Abbasi
+#    project_url: https://github.com/mohammadv184/skm
+#    copyright:  2024 - Mohammad Abbasi - All Rights Reserved
+#    license_url: https://github.com/mohammadv184/skm/blob/master/LICENSE
+#    require_license_acceptance: false
+#    project_source_url: https://github.com/mohammadv184/skm
+#    docs_url: https://github.com/mohammadv184/skm
+#    bug_tracker_url: https://github.com/mohammadv184/skm/issues
+#    tags: "security, fido2, cli, command-line, tool"
+#    summary: A CLI for managing FIDO2 security keys.
+#    description: A CLI for managing FIDO2 security keys.
+#    release_notes: https://github.com/mohammadv184/skm/releases/tag/v{{ .Version }}
+#    api_key: "{{ .Env.CHOCOLATEY_API_KEY }}"
+#    source_repo: "https://push.chocolatey.org/"
+
+archives:
+  - id: skm
+    builds:
+      - general
+    format: tar.gz
+    name_template: '{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    wrap_in_directory: true
+    files: # in addition to the executable file.
+      - README.md
+      - LICENSE
+    # use zip for Windows archives which is more comfortable for Windows users
+    format_overrides:
+      - goos: windows
+        format: zip
+
+source:
+  enabled: true
+  name_template: "{{ .ProjectName }}-{{ .Version }}{{ if .Prerelease }}-{{ .Prerelease }}{{ end }}-src"
+  format: tar.gz
+
+
+homebrew_casks:
+  - name: skm
+    ids:
+      - skm
+    commit_author:
+      name: SKM CI
+      email: mohammad.v184@gmail.com
+    commit_msg_template:  "bump(homebrew): release {{ .Version }}-{{ .ShortCommit }}"
+    homepage: https://github.com/mohammadv184/skm
+    description: A CLI for managing FIDO2 security keys.
+    license: MIT
+    repository:
+      owner: mohammadv184
+      name: homebrew-tap
+    manpages:
+      - "./assets/mandocs/skm.1.gz"
+    completions:
+      bash: "./assets/auto-completions/goreleaser.bash"
+      zsh: "./assets/auto-completions/goreleaser.zsh"
+      fish: "./assets/auto-completions/goreleaser.fish"
+
+checksum:
+  name_template: '{{ .ProjectName }}-{{ .Version }}-checksums.txt'
+  algorithm: sha256
+  split: false
+
+
+release:
+  prerelease: auto
+  ids:
+    - skm
+    - skm-deb
+    - skm-rpm
+    - skm-arch
+    - skm-mac-all
+  name_template: '{{ .ProjectName }}-v{{ .Version }}'
+  mode: keep-existing
+
+publishers:
+  - name: packages-repo
+    ids:
+      - skm-deb
+      - skm-rpm
+    env:
+      - FURY_TOKEN={{ .Env.FURY_TOKEN }}
+    cmd: ./scripts/upload-packages.sh {{ .ArtifactName }}
+
+
+changelog:
+  use: git
+  sort: asc
+  abbrev: 0 # full commit hash
+  groups:
+    - title: "Features"
+      regexp: '^feat'
+      order: 0
+    - title: "Bug Fixes"
+      regexp: '^fix'
+      order: 1
+
+  filters:
+    exclude:
+      - '^chore'
+      - '^ci'
+      - '^docs'
+      - '^test'
+
+
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+# vim: set ts=2 sw=2 tw=0 fo=cnqoj
