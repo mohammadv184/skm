@@ -1,7 +1,7 @@
 <p align="center">
   <img alt="SKM logo" src="assets/logo.png" height="150" />
   <h3 align="center">SKM</h3>
-  <p align="center">A powerful CLI tool for managing FIDO2 security keys with ease and style.</p>
+  <p align="center">A powerful CLI tool for managing FIDO2 security keys.</p>
 </p>
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/mohammadv184/skm.svg)](https://pkg.go.dev/github.com/mohammadv184/skm)

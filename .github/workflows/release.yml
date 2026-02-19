@@ -59,9 +59,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.SKM_GITHUB_TOKEN }}
           FURY_TOKEN: ${{ secrets.FURY_TOKEN }}
-      - uses: actions/upload-artifact@v3
-        with:
-          name: release-artifacts
-          path: |
-            . 
-            !./dist
