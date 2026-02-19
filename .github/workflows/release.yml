@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCKER_CLI_EXPERIMENTAL: enabled
-      GITHUB_TOKEN: ${{ secrets.GLOADER_GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.SKM_GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,7 +41,7 @@ jobs:
 #        with:
 #          registry: ghcr.io
 #          username: ${{ github.repository_owner }}
-#          password: ${{ secrets.GLOADER_GITHUB_TOKEN }}
+#          password: ${{ secrets.SKM_GITHUB_TOKEN }}
 #      - name: snapcraft-login
 #        if: startsWith(github.ref, 'refs/tags/v')
 #        run: snapcraft login --with <(echo "${{ secrets.SNAPCRAFT_LOGIN }}")
