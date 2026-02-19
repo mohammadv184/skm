@@ -312,26 +312,26 @@ nfpms:
           mode: 0644
           mtime: "{{ .CommitDate }}"
 
-snapcrafts:
-  - name: skm
-    builds:
-      - snapcraft
-    title: "SKM: Security Key Manager"
-    publish: false
-    summary: A CLI for managing FIDO2 security keys.
-    description: |
-        SKM is a powerful command-line interface (CLI) tool designed to simplify the management of FIDO2 security keys. With SKM, users can easily configure, monitor, and maintain their security keys, ensuring enhanced security for their online accounts. Whether you're a developer, system administrator, or security enthusiast, SKM provides an intuitive and efficient way to manage your FIDO2 security keys with ease.
-    channel_templates:
-      - edge
-      - stable
-    grade: stable
-    confinement: strict
-    license: MIT
-    base: bare # we don't have any requirements that need a base
-    apps:
-      skm:
-        command: skm
-        plugs: [ "home","network"]
+#snapcrafts:
+#  - name: skm
+#    builds:
+#      - snapcraft
+#    title: "SKM: Security Key Manager"
+#    publish: true
+#    summary: A CLI for managing FIDO2 security keys.
+#    description: |
+#        SKM is a powerful command-line interface (CLI) tool designed to simplify the management of FIDO2 security keys. With SKM, users can easily configure, monitor, and maintain their security keys, ensuring enhanced security for their online accounts. Whether you're a developer, system administrator, or security enthusiast, SKM provides an intuitive and efficient way to manage your FIDO2 security keys with ease.
+#    channel_templates:
+#      - edge
+#      - stable
+#    grade: stable
+#    confinement: strict
+#    license: MIT
+#    base: bare # we don't have any requirements that need a base
+#    apps:
+#      skm:
+#        command: skm
+#        plugs: [ "home","network"]
 
 #chocolateys:
 #  - name: skm
