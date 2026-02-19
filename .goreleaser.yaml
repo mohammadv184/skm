@@ -36,7 +36,9 @@ builds:
       - mips64le # MIPS 64-bit Little Endian
       - riscv64 # RISC-V 64-bit
       - loong64 # LoongArch 64-bit
-
+    ignore:
+      - goos: windows
+        goarch: arm
     ldflags:
       - -s # strip the debug information
       - -w # strip the DWARF symbols, which will reduce the binary size
@@ -185,12 +187,12 @@ builds:
     binary: skm
     mod_timestamp: "{{ .CommitTimestamp }}"
 
-#universal_binaries: # mac fat binaries
-#  - id: skm-mac-all
-#    ids:
-#      - general
-#    name_template: "{{ .ProjectName }}_{{ .Version }}_mac_all"
-#    replace: false
+universal_binaries: # mac fat binaries
+  - id: skm-mac-all
+    ids:
+      - general
+    name_template: "{{ .ProjectName }}_{{ .Version }}_mac_all"
+    replace: false
 
 gomod:
   proxy: true
