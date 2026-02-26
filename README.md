@@ -48,7 +48,7 @@ brew install --cask mohammadv184/tap/skm
 
 ### Go install (Not recommended)
 ```bash
-go install github.com/mohammadv184/skm@latest
+go install github.com/mohammadv184/skm/cmd/skm@latest
 ```
 
 ### Binary builds

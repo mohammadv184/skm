@@ -317,7 +317,7 @@ snapcrafts:
     builds:
       - snapcraft
     title: "SKM: Security Key Manager"
-    publish: true
+    publish: false
     summary: A CLI for managing FIDO2 security keys.
     description: |
         SKM is a powerful command-line interface (CLI) tool designed to simplify the management of FIDO2 security keys. With SKM, users can easily configure, monitor, and maintain their security keys, ensuring enhanced security for their online accounts. Whether you're a developer, system administrator, or security enthusiast, SKM provides an intuitive and efficient way to manage your FIDO2 security keys with ease.
@@ -392,11 +392,11 @@ homebrew_casks:
       owner: mohammadv184
       name: homebrew-tap
     manpages:
-      - "./assets/mandocs/skm.1.gz"
+      - "assets/mandocs/skm.1.gz"
     completions:
-      bash: "./assets/auto-completions/goreleaser.bash"
-      zsh: "./assets/auto-completions/goreleaser.zsh"
-      fish: "./assets/auto-completions/goreleaser.fish"
+      bash: "assets/auto-completions/goreleaser.bash"
+      zsh: "assets/auto-completions/goreleaser.zsh"
+      fish: "assets/auto-completions/goreleaser.fish"
 
 checksum:
   name_template: '{{ .ProjectName }}-{{ .Version }}-checksums.txt'
