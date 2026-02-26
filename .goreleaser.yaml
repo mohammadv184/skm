@@ -394,9 +394,9 @@ homebrew_casks:
     manpages:
       - "assets/mandocs/skm.1.gz"
     completions:
-      bash: "assets/auto-completions/goreleaser.bash"
-      zsh: "assets/auto-completions/goreleaser.zsh"
-      fish: "assets/auto-completions/goreleaser.fish"
+      bash: "assets/auto-completions/skm.bash"
+      zsh: "assets/auto-completions/skm.zsh"
+      fish: "assets/auto-completions/skm.fish"
 
 checksum:
   name_template: '{{ .ProjectName }}-{{ .Version }}-checksums.txt'
