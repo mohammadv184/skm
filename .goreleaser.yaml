@@ -362,10 +362,10 @@ archives:
     files: # in addition to the executable file.
       - README.md
       - LICENSE
-       - ./assets/auto-completions/skm.bash
-       - ./assets/auto-completions/skm.fish
-       - ./assets/auto-completions/skm.zsh
-       - ./assets/mandocs/skm.1.gz
+      - ./assets/auto-completions/skm.bash
+      - ./assets/auto-completions/skm.fish
+      - ./assets/auto-completions/skm.zsh
+      - ./assets/mandocs/skm.1.gz
     # use zip for Windows archives which is more comfortable for Windows users
     format_overrides:
       - goos: windows
