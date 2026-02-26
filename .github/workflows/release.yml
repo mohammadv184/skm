@@ -15,6 +15,7 @@ jobs:
     env:
       DOCKER_CLI_EXPERIMENTAL: enabled
       GITHUB_TOKEN: ${{ secrets.SKM_GITHUB_TOKEN }}
+      SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
     steps:
       - uses: actions/checkout@v4
         with:
