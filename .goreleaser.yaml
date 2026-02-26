@@ -1,4 +1,4 @@
-project_name: SKM
+project_name: skm
 version: 2
 dist: ./dist
 report_sizes: true
@@ -312,26 +312,26 @@ nfpms:
           mode: 0644
           mtime: "{{ .CommitDate }}"
 
-#snapcrafts:
-#  - name: skm
-#    builds:
-#      - snapcraft
-#    title: "SKM: Security Key Manager"
-#    publish: true
-#    summary: A CLI for managing FIDO2 security keys.
-#    description: |
-#        SKM is a powerful command-line interface (CLI) tool designed to simplify the management of FIDO2 security keys. With SKM, users can easily configure, monitor, and maintain their security keys, ensuring enhanced security for their online accounts. Whether you're a developer, system administrator, or security enthusiast, SKM provides an intuitive and efficient way to manage your FIDO2 security keys with ease.
-#    channel_templates:
-#      - edge
-#      - stable
-#    grade: stable
-#    confinement: strict
-#    license: MIT
-#    base: bare # we don't have any requirements that need a base
-#    apps:
-#      skm:
-#        command: skm
-#        plugs: [ "home","network"]
+snapcrafts:
+  - name: skm
+    builds:
+      - snapcraft
+    title: "SKM: Security Key Manager"
+    publish: true
+    summary: A CLI for managing FIDO2 security keys.
+    description: |
+        SKM is a powerful command-line interface (CLI) tool designed to simplify the management of FIDO2 security keys. With SKM, users can easily configure, monitor, and maintain their security keys, ensuring enhanced security for their online accounts. Whether you're a developer, system administrator, or security enthusiast, SKM provides an intuitive and efficient way to manage your FIDO2 security keys with ease.
+    channel_templates:
+      - edge
+      - stable
+    grade: stable
+    confinement: strict
+    license: MIT
+    base: bare # we don't have any requirements that need a base
+    apps:
+      skm:
+        command: skm
+        plugs: [ "hidraw"]
 
 #chocolateys:
 #  - name: skm
@@ -359,7 +359,6 @@ archives:
       - general
     format: tar.gz
     name_template: '{{ .ProjectName }}-{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
-    wrap_in_directory: true
     files: # in addition to the executable file.
       - README.md
       - LICENSE
@@ -370,7 +369,7 @@ archives:
     # use zip for Windows archives which is more comfortable for Windows users
     format_overrides:
       - goos: windows
-        format: zip
+        formats: [zip]
 
 #source:
 #  enabled: true
@@ -384,7 +383,7 @@ homebrew_casks:
       - skm
     commit_author:
       name: SKM CI
-      email: mohammad.v184@gmail.com
+      email: ci@mohammad-abbasi.me
     commit_msg_template:  "bump(homebrew): release {{ .Version }}-{{ .ShortCommit }}"
     homepage: https://github.com/mohammadv184/skm
     description: A CLI for managing FIDO2 security keys.

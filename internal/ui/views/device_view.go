@@ -2,6 +2,8 @@ package views
 
 import (
 	"fmt"
+	"maps"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -102,9 +104,9 @@ func (v *DeviceInfoView) Render() string {
 		enabledStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("42"))   // Green
 		disabledStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("241")) // Gray
 
-		for k, val := range v.info.Options {
-			b.WriteString(optionLabelStyle.Render(string(k) + ":"))
-			if val {
+		for _, k := range slices.Sorted(maps.Keys(v.info.Options)) {
+			b.WriteString(optionLabelStyle.Render(k.String() + ":"))
+			if v.info.Options[k] {
 				b.WriteString(enabledStyle.Render("✔ enabled"))
 			} else {
 				b.WriteString(disabledStyle.Render("✘ disabled"))
