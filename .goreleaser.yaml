@@ -329,9 +329,9 @@ snapcrafts:
     license: MIT
     base: bare # we don't have any requirements that need a base
     apps:
-      security-key-manager:
+      skm:
         command: skm
-        plugs: [ "hidraw"]
+        plugs: [ "u2f-devices" ]
 
 #chocolateys:
 #  - name: skm
